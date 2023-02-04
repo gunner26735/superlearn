@@ -2,7 +2,7 @@ const express = require("express");
 const envFile = require("dotenv");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
-
+const cors = require('cors')
 const connectDB = require('./server/database/connection')
 
 envFile.config({path:".env"});
@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 8080;
 //mongoDB connection~
 connectDB();
 
+app.use(cors());
 // to log request
 app.use(morgan("tiny"));
 

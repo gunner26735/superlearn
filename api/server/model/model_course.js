@@ -16,6 +16,10 @@ var schema = new mongo.Schema({
         type : String,
         default : ''
     },
+    cField : {
+        type : String,
+        default : ''
+    },
     cDate : {
         type : Date,
         default : NaN

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const uri = "mongodb+srv://admin:admin123@cluster0.skjfprm.mongodb.net/?retryWrites=true&w=majority";
 
-
 const connectDB = async()=>{
     try{
     //mogodb connection string

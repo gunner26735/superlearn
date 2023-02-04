@@ -2,6 +2,7 @@ const TeacherDB = require('../model/model_teacher')
 const StudentDB = require('../model/model_student')
 const CourseDB = require('../model/model_course');
 const courseDB = require('../model/model_course');
+const {Counter} = require('../model/model_seq')
 
 /*
 TO create new Teacher
@@ -35,15 +36,28 @@ exports.createTeacher = (req,res)=>{
 
 // TO Find Teacher
 exports.findTeacher = (req,res)=>{
-    TeacherDB.findOne({walletAddress : req.body.wAddress}).then(data=>{
-        if(!data){
-            res.send("None")
-        }else{
-            res.send(data);
-        }
-    }).catch(err=>{
-        res.status(500).send({message:err.message || "some error occurred "})
-    })
+    if(req.query.wAddress){
+        TeacherDB.findOne({walletAddress : req.query.wAddress}).then(data=>{
+            if(!data){
+                res.status(404).send("None")
+            }else{
+                res.send(data);
+            }
+        }).catch(err=>{
+            res.status(500).send({message:err.message || "some error occurred "})
+        })
+    }
+    else{
+        TeacherDB.find().then(data=>{
+            if(!data){
+                res.status(404).send("None")
+            }else{
+                res.send(data);
+            }
+        }).catch(err=>{
+            res.status(500).send({message:err.message || "some error occurred "})
+        })
+    }
 }
 
 /*
@@ -77,15 +91,28 @@ exports.createStudent = (req,res)=>{
 
 // TO Find Student
 exports.findStudent = (req,res)=>{
-    StudentDB.findOne({walletAddress : req.body.wAddress}).then(data=>{
-        if(!data){
-            res.send("None")
-        }else{
-            res.send(data);
-        }
-    }).catch(err=>{
-        res.status(500).send({message:err.message || "some error occurred "})
-    })
+    if(req.query.wAddress){
+        StudentDB.findOne({walletAddress : req.query.wAddress}).then(data=>{
+            if(!data){
+                res.status(404).send("None")
+            }else{
+                res.send(data);
+            }
+        }).catch(err=>{
+            res.status(500).send({message:err.message || "some error occurred "})
+        })
+    }
+    else{
+        StudentDB.find().then(data=>{
+            if(!data){
+                res.status(404).send("None")
+            }else{
+                res.send(data);
+            }
+        }).catch(err=>{
+            res.status(500).send({message:err.message || "some error occurred "})
+        })
+    }
 }
 
 //To create a course 
@@ -99,6 +126,7 @@ exports.createCourse = (req,res)=>{
     walletAddress: req.body.walletAddress,
     cName: req.body.cName,
     cDesc: req.body.cDesc,
+    cField: req.body.cField,
     cDate: req.body.cDate,
     cOutcomes : req.body.cOutcomes
     })
@@ -131,7 +159,7 @@ exports.getCourses = (req,res)=>{
     else{
         courseDB.find().then(data=>{
             if(!data){
-                res.send("None")
+                res.status(404).send("None")
             }else{
                 res.send(data);
             }
@@ -139,4 +167,18 @@ exports.getCourses = (req,res)=>{
             res.status(500).send({message:err.message || "some error occurred "})
         })
     }
+}
+
+//TO fetch current count
+//Fetch all Courses
+exports.getCount = (req,res)=>{
+    Counter.find().then(data=>{
+        if(!data){
+            res.status(404).send('None')
+        }else{
+            res.send(data);
+        }
+    }).catch(err=>{
+        res.status(500).send({message:err.message || "some error occurred in fetchin."})
+    })
 }
