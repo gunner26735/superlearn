@@ -1,70 +1,58 @@
-# Getting Started with Create React App
+## Inspiration
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Time is money and we wanted to help students value their time and be habitual to learn daily and improve themselves at every second.
 
-## Available Scripts
+Many times we just buy a course , study for a while and then forget about the course, we wanted to solve this problem by helping the student to complete the course with a high pace and earn rewards on successful compilation.
 
-In the project directory, you can run:
+We a re using superfluid so money will be deducted from students account in realtime for every second that he/she is holding the course.
 
-### `npm start`
+## What it does
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+We have two types of users :
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+5ire chain contract deployed address : 0x72C86E4C9f5da968093f3bB23D9fD8d028B6B965
 
-### `npm test`
+1> **Teacher**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ - Teacher can create his profile with all basic details like his profession, his university.
 
-### `npm run build`
+ - Teacher can start a course , upload videos which will stored on IPFS and under a same collection.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- eg:Teacher creates a course on Machine learning and will upload the recorded videos on our platform and we will store those videos on IPFS and store the CIDs on our smart contract which is deployed on 5ire chain.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Teacher can live stream some modules of the course and can also mint those videos so that in future the students can see those live streams.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Teacher will set subscription tiers for their courses which the students can buy.
 
-### `npm run eject`
+  - Example : Buy course for 5 Days pay $5,For 15 Days pay $10,for 30 Days pay $25.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Can create course certificates as SBTs and students can mint it upon completion.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Teacher can send notifications about the course using Push Notifications.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+ 2> **Student**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ - Student can create a profile and browse courses.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- student can opt in courses and Teachers Push channel to receive notifications regarding the course.
 
-### Code Splitting
+- When student buys a course , a superfluid money stream will be started .
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- When a money stream is started the money is deducted from student's account in realtime for every second. 
 
-### Analyzing the Bundle Size
+- Eg: student buys a course subscription of 15 days worth $10 ,so for every day money stream will be 1 day = 10/15 = $0.66 and for every second it will be $((0.66/24)/60)/60).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+so if a student completes the course in 10 days then he/she have paid only 0.66*10 =6$ and hence will be saving $9 except for whole $15.
 
-### Making a Progressive Web App
+- If the student bets on himself that he will complete the course in 10 days then after completion he/she will get a 10% refund on the fees paid by him.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Due to superfluid money stream ,he/she can close the money stream whenever he/she completes the course and thus saving the remaining money for the left days .
 
-### Advanced Configuration
+## How we built it
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- We built the payment system using Superfluid, using IPFS for storing video lectures, React for frontend .
 
-### Deployment
+- For money streaming we first need to wrap tokens into supertokens and then start the money stream and we are batching both of this action and creating a single transaction to do both.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
